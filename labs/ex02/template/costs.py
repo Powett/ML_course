@@ -6,7 +6,7 @@ import numpy as np
 
 
 
-def compute_loss(y, tx, w):
+def compute_loss_mae(y, tx, w):
     """Calculate the loss using either MSE or MAE.
 
     Args:
@@ -17,8 +17,18 @@ def compute_loss(y, tx, w):
     Returns:
         the value of the loss (a scalar), corresponding to the input parameters w.
     """
-    # ***************************************************
-    # INSERT YOUR CODE HERE
-    # TODO: compute loss by MSE
-    # ***************************************************
-    raise NotImplementedError
+    return np.sum(np.abs(y-tx@w))/y.shape[0]
+
+def compute_loss_mse(y, tx, w):
+    """Calculate the loss using either MSE or MAE.
+
+    Args:
+        y: shape=(N, )
+        tx: shape=(N,2)
+        w: shape=(2,). The vector of model parameters.
+
+    Returns:
+        the value of the loss (a scalar), corresponding to the input parameters w.
+    """
+    e=y-tx.dot(w)
+    return 1/(2*y.shape[0]) * e.dot(e)
